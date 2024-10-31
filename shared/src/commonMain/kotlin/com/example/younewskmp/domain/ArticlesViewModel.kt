@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class ArticlesViewModel(): ArticleScreenBaseViewModel() {
+class ArticlesViewModel: ArticleScreenBaseViewModel() {
     private var _stfArticle = MutableStateFlow<ArticleState?>(ArticleState())
     val articleState = _stfArticle.asStateFlow()
 
