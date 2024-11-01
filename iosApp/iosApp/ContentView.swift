@@ -3,7 +3,7 @@ import shared
 
 struct ContentView: View {
 	var body: some View {
-        ArticleScreen(vm: .init())
+        ArticleScreen(viewModel: .init())
 	}
 }
 

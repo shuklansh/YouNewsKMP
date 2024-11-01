@@ -1,15 +1,14 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.compose.compiler)
 }
 
 android {
-    namespace = "com.example.younewskmp.android"
+    namespace =  "com.example.younewskmp.android"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.example.younewskmp.android"
-        minSdk = 34
+        applicationId =  "com.example.younewskmp.android"
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -17,9 +16,12 @@ android {
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/**"
         }
     }
     buildTypes {
@@ -42,7 +44,8 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.hilt.lifecycle.viewmodel)
+    implementation(libs.coil.compose)
+    implementation(libs.androidx.navigation.compose)
     debugImplementation(libs.compose.ui.tooling)
 }
+

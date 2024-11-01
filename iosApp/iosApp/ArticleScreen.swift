@@ -7,55 +7,99 @@
 //
 
 import SwiftUI
-import shared
+import Shared
 
-extension ArticleScreen {
-    
+extension ArticlesScreen {
+
     @MainActor
-    class ArticleViewModelWrapper: ObservedObject {
+    class ArticlesViewModelWrapper: ObservableObject {
         let articlesViewModel: ArticlesViewModel
-        
+
+
         init() {
             articlesViewModel = ArticlesViewModel()
-            articleState = articlesViewModel.articleState.value
+            articlesState = articlesViewModel.articlesState.value
         }
-        
-        @Published var articleState: ArticleState
-        
+
+        @Published var articlesState: ArticleState
+
         func startObserving() {
             Task {
-                for await articleS in articlesViewModel.articleState {
-                    self.articleState = articleS
+                for await articlesS in articlesViewModel.articlesState {
+                    self.articlesState = articlesS
                 }
             }
         }
     }
 }
 
-struct ArticleScreen: View {
-    @ObservedObject private (set) var vm: ArticleViewModelWrapper
+struct ArticlesScreen: View {
+
+    @ObservedObject private(set) var viewModel: ArticlesViewModelWrapper
+
     var body: some View {
         VStack {
-            if vm.articleState.error {
-                Text("Error")
+            AppBar()
+
+            if viewModel.articlesState.loading {
+                ProgressView()
             }
-            if vm.articleState.loading {
-                Loader()
+
+            if let error = viewModel.articlesState.error {
+                ErrorMessage(message: error)
             }
-            if (!vm.articleState.isEmpty) {
+
+            if(!viewModel.articlesState.success.isEmpty) {
                 ScrollView {
                     LazyVStack(spacing: 10) {
-                        forEach(vm.articleState.articles, id: \.self) { article in
-                            Text(article.title)
-                            Text(article.content)
-                            Text(article.author)
+                        ForEach(viewModel.articlesState.success, id: \.self) { article in
+                            ArticleItemView(article: article)
                         }
                     }
                 }
             }
+
         }.onAppear{
-            self.vm.startObserving()
+            self.viewModel.startObserving()
         }
+    }
+}
+
+struct AppBar: View {
+    var body: some View {
+        Text("Articles")
+            .font(.largeTitle)
+            .fontWeight(.bold)
+    }
+}
+
+struct ArticleItemView: View {
+    var article: Article
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(article.name)
+                .font(.title)
+                .fontWeight(.bold)
+            Text(article.content)
+            Text(article.author)
+        }
+        .padding(16)
+    }
+}
+
+struct Loader: View {
+    var body: some View {
+        ProgressView()
+    }
+}
+
+struct ErrorMessage: View {
+    var message: String
+
+    var body: some View {
+        Text(message)
+            .font(.title)
     }
 }
 

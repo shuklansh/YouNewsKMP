@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -7,56 +8,52 @@ plugins {
 }
 
 kotlin {
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    targetHierarchy.default()
+
     androidTarget {
         compilations.all {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    jvmTarget.set(JvmTarget.JVM_1_8)
-                }
+            kotlinOptions {
+                jvmTarget = "1.8"
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "shared"
-            isStatic = true
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "Shared"
         }
     }
 
     sourceSets {
-        commonMain.dependencies {
-            //put your multiplatform dependencies here
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.androidx.hilt.lifecycle.viewmodel)
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.core)
+            }
         }
 
-        androidMain.dependencies {
-            implementation(libs.androidx.lifecycle.viewmodel)
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.androidx.lifecycle.viewmodel.ktx)
+            }
         }
 
-        iosMain.dependencies {
+        val iosMain by getting {
+            dependencies {
 
-        }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+            }
         }
     }
 }
 
 android {
-    namespace = "com.example.younewskmp"
+    namespace = "com.example.younewskmp.android"
     compileSdk = 34
     defaultConfig {
-        minSdk = 34
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        minSdk = 24
     }
 }
