@@ -7,9 +7,9 @@
 //
 
 import SwiftUI
-import Shared
+import shared
 
-extension ArticlesScreen {
+extension ArticleScreen {
 
     @MainActor
     class ArticlesViewModelWrapper: ObservableObject {
@@ -33,7 +33,7 @@ extension ArticlesScreen {
     }
 }
 
-struct ArticlesScreen: View {
+struct ArticleScreen: View {
 
     @ObservedObject private(set) var viewModel: ArticlesViewModelWrapper
 

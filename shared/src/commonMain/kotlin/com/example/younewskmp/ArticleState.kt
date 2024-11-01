@@ -1,6 +1,4 @@
-package com.example.younewskmp.domain
-
-import com.example.younewskmp.data.dto.Article
+package com.example.younewskmp
 
 // cannot use sealed classes with KMP for now.. :/
 data class ArticleState(

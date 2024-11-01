@@ -1,14 +1,11 @@
-package com.example.younewskmp.domain
+package com.example.younewskmp
 
-import com.example.younewskmp.ArticleScreenBaseViewModel
-import com.example.younewskmp.data.dto.Article
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class ArticlesViewModel: ArticleScreenBaseViewModel() {
+class ArticlesViewModel(): ArticlesBaseViewModel() {
     private var _stfArticle:MutableStateFlow<ArticleState> = MutableStateFlow(ArticleState(loading = true))
     val articlesState: StateFlow<ArticleState> get() = _stfArticle
 

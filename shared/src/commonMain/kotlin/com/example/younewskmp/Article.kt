@@ -1,4 +1,4 @@
-package com.example.younewskmp.data.dto
+package com.example.younewskmp
 
 data class Article(
     val name: String = "News headline",

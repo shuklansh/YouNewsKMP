@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.younewskmp.android.components.ArticleScreen
-import com.example.younewskmp.domain.ArticlesViewModel
+import com.example.younewskmp.ArticlesViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

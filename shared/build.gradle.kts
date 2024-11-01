@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    id("co.touchlab.skie") version "0.4.19"
+    id("co.touchlab.skie") version "0.9.3"
 }
 
 kotlin {
@@ -25,7 +25,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "Shared"
+            baseName = "shared"
         }
     }
 
@@ -51,7 +51,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.example.younewskmp.android"
+    namespace = "com.example.younewskmp.shared"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
