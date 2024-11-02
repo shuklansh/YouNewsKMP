@@ -67,7 +67,7 @@ struct ArticleScreen: View {
 
 struct AppBar: View {
     var body: some View {
-        Text("Articles")
+        Text("YouNews KMP")
             .font(.largeTitle)
             .fontWeight(.bold)
     }
@@ -78,6 +78,17 @@ struct ArticleItemView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
+            AsyncImage(url: URL(string: article.imageUrl)) { phase in
+                if phase.image != nil {
+                    phase.image!
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } else if phase.error != nil {
+                    Text("Image Load Error")
+                } else {
+                    ProgressView()
+                }
+            }
             Text(article.name)
                 .font(.title)
                 .fontWeight(.bold)
