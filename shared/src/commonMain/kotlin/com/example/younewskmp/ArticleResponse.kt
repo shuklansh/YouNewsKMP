@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ArticleResponse(
     @SerialName("status")
-    val status: String,
+    val status: String?,
     @SerialName("totalResults")
-    val results: Int,
+    val results: Int?,
     @SerialName("articles")
-    val articles: List<ArticlesRaw>
+    val articles: List<ArticlesRaw>?
 )

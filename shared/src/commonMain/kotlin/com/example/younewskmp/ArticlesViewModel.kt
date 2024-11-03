@@ -39,7 +39,6 @@ class ArticlesViewModel(): ArticlesBaseViewModel() {
     private fun getArticles() {
         scope.launch {
             val fetchedArticles = useCase.getArticles()
-
             _stfArticle.emit(ArticleState(success = fetchedArticles))
         }
     }

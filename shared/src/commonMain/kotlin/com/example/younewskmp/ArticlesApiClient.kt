@@ -15,6 +15,6 @@ class ArticlesApiClient(private val httpClient: HttpClient) {
 
     suspend fun fetchArticles(): List<ArticlesRaw> {
         val response: ArticleResponse = httpClient.get(everythingBaseUrl).body()
-        return response.articles
+        return response.articles.orEmpty()
     }
 }
