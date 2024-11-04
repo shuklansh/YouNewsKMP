@@ -1,4 +1,6 @@
-package com.example.younewskmp
+package com.example.younewskmp.articles
+
+import com.example.younewskmp.articles.domain.model.Article
 
 // cannot use sealed classes with KMP for now.. :/
 data class ArticleState(

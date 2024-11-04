@@ -1,4 +1,4 @@
-package com.example.younewskmp
+package com.example.younewskmp.articles
 
 import kotlinx.coroutines.CoroutineScope
 

@@ -1,4 +1,4 @@
-package com.example.younewskmp
+package com.example.younewskmp.articles.data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

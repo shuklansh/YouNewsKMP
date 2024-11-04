@@ -1,5 +1,8 @@
-package com.example.younewskmp
+package com.example.younewskmp.articles.domain
 
+import com.example.younewskmp.articles.data.network.ArticlesApiClient
+import com.example.younewskmp.articles.data.dto.ArticlesRaw
+import com.example.younewskmp.articles.domain.model.Article
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone

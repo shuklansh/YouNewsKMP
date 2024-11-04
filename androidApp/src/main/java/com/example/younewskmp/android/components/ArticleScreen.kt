@@ -20,12 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.younewskmp.ArticlesViewModel
+import com.example.younewskmp.articles.ArticlesViewModel
+import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ArticleScreen(
-    articleViewModel: ArticlesViewModel
+    articleViewModel: ArticlesViewModel = getViewModel<ArticlesViewModel>()
 ) {
     val articles by articleViewModel.articlesState.collectAsState()
 

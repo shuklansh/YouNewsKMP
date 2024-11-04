@@ -1,38 +1,22 @@
-package com.example.younewskmp
+package com.example.younewskmp.articles
 
-import kotlinx.coroutines.delay
+import com.example.younewskmp.articles.data.network.ArticlesApiClient
+import com.example.younewskmp.articles.domain.ArticlesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
-class ArticlesViewModel(): ArticlesBaseViewModel() {
+class ArticlesViewModel(
+    private val useCase: ArticlesUseCase
+): ArticlesBaseViewModel() {
     private var _stfArticle:MutableStateFlow<ArticleState> = MutableStateFlow(ArticleState(loading = true))
     val articlesState: StateFlow<ArticleState> get() = _stfArticle
 
-    private val useCase: ArticlesUseCase
-
     init {
-        val httpClient = HttpClient {
-            install(ContentNegotiation) {
-                json(Json {
-                    prettyPrint = true
-                    isLenient = true
-                    ignoreUnknownKeys = true
-                })
-            }
-        }
-
-        val service = ArticlesApiClient(httpClient)
-
-        useCase = ArticlesUseCase(service)
-
         getArticles()
     }
 

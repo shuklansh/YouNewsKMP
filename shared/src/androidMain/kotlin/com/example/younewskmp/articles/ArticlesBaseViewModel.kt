@@ -1,4 +1,4 @@
-package com.example.younewskmp
+package com.example.younewskmp.articles
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

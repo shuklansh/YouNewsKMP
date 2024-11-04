@@ -1,5 +1,7 @@
-package com.example.younewskmp
+package com.example.younewskmp.articles.data.network
 
+import com.example.younewskmp.articles.data.dto.ArticleResponse
+import com.example.younewskmp.articles.data.dto.ArticlesRaw
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

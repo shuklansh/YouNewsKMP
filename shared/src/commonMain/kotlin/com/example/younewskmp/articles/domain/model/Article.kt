@@ -1,4 +1,4 @@
-package com.example.younewskmp
+package com.example.younewskmp.articles.domain.model
 
 data class Article(
     val name: String,
